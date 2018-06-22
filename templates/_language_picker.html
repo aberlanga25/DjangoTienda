@@ -1,0 +1,19 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as current_lang %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+
+{# We display language picker only if there're languages to pick from #}
+{% if languages|length > 1 %}
+ <div class="languages">
+     <button onclick="languagePick()" class="dropbtn">{{ current_lang.name }}</button>
+     <div id="myDropdown" class="dropdown-content">
+        {% for language in languages %}
+            <a href="/{{ language.code }}/" {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                {{ language.name }}
+            </a>
+        {% endfor %}
+     </div>
+ </div>
+{% endif %}

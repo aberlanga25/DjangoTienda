@@ -22,13 +22,14 @@ from django.utils.translation import gettext_lazy as _
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
+    path(_('account/'), include(('Tienda.account.urls', 'Tienda.account'), namespace='account')),
     path(_('cart/'),include(('Tienda.cart.urls','Tienda.cart'),namespace='cart')),
     path(_('coupons/'),include(('Tienda.coupons.urls','Tienda.coupons'),namespace='coupons')),
     path(_('orders/'),include(('Tienda.orders.urls','Tienda.orders'),namespace='orders')),
     path('paypal/',include('paypal.standard.ipn.urls')),
     path(_('payment/'),include(('Tienda.payment.urls','Tienda.payment'),namespace='payment')),
     path('rosetta/', include('rosetta.urls')),
-    path('',include(('Tienda.shop.urls','Tienda.shop'),namespace='shop')),
+    path('',include(('Tienda.shop.urls','Tienda.shop'),namespace='shop'))
 )
 
 if settings.DEBUG:

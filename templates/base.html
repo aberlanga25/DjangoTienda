@@ -7,26 +7,29 @@
     <title>{% block title %}{% trans "My shop" %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <script src="{% static 'js/app.js' %}"></script>
 </head>
 <body>
     <div id="header">
         <a href="/" class="logo">{% trans "My shop" %}</a>
-        
         {% get_current_language as LANGUAGE_CODE %}
+        {% get_language_info for LANGUAGE_CODE as current_lang %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
+
+        {# We display language picker only if there're languages to pick from #}
+        {% if languages|length > 1 %}
         <div class="languages">
-            <p>{% trans "Language" %}:</p> 
-            <ul class="languages">
+            <button onclick="languagePick()" class="dropbtn">{{ current_lang.name }}</button>
+            <div id="languagePicker" class="dropdown-content">
             {% for language in languages %}
-                <li>
-                    <a href="/{{ language.code }}/" {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
-                    {{ language.name }} ({{ language.code }})
-                    </a>
-                </li>
+                <a href="/{{ language.code }}/" {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                    {{ language.name }}
+                </a>
             {% endfor %}
-            </ul> 
+            </div>
         </div>
+        {% endif %}
     </div>
     <div id="subheader">
         <div class="cart">

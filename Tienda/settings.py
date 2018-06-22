@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'Tienda.coupons',
     'Tienda.orders',
     'Tienda.payment',
+    'Tienda.account',
 
+    'django_prices',
     'localflavor',
     'parler',
     'rosetta',
@@ -156,6 +158,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 COUNTRIES_ONLY = ['US', 'MX']
+
+DEFAULT_CURRENCY = 'USD'
 
 CART_SESSION_ID = 'cart'
 
